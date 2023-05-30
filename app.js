@@ -106,21 +106,39 @@ const boxRef = document.querySelector('.box');
 // console.log(g.next());
 
 
-function* getData(url){
-    const data = yield fetch(url);
-    console.log(data);
+// function* getData(url){
+//     const data = yield fetch(url);
+//     console.log(data);
+// }
+//
+// const g = getData(url)
+// g.next()
+//     .value
+//     .then((response) => g.next(response))
+//
+//
+//
+// async function getDataMagic(url){
+//     const data = await fetch(url);
+//     console.log(data);
+// }
+//
+// getDataMagic(url).catch(console.error);
+
+function move(top, left) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            boxRef.style.left = left;
+            boxRef.style.top = top;
+            resolve();
+        }, 3000);
+    });
 }
 
-const g = getData(url)
-g.next()
-    .value
-    .then((response) => g.next(response))
-
-
-
-async function getDataMagic(url){
-    const data = await fetch(url);
-    console.log(data);
+async function animate() {
+    await move(0, '500px')
+    await move('500px', '500px')
+    await move('500px', 0)
+    await move(0, 0)
 }
-
-getDataMagic(url).catch(console.error);
+animate().catch(() => {});
