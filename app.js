@@ -91,16 +91,36 @@ const boxRef = document.querySelector('.box');
 //     .catch((error) => console.log(error))
 //     .finally(() => {console.log('done!')})
 
-function* gen(){
-    console.log(1)
-    yield 1
-    console.log(2)
-    yield 2
-    console.log(3)
+// function* gen(){
+//     console.log(1)
+//     yield 1
+//     console.log(2)
+//     yield 2
+//     console.log(3)
+// }
+//
+// const g = gen();
+//
+// console.log(g.next());
+// console.log(g.next());
+// console.log(g.next());
+
+
+function* getData(url){
+    const data = yield fetch(url);
+    console.log(data);
 }
 
-const g = gen();
+const g = getData(url)
+g.next()
+    .value
+    .then((response) => g.next(response))
 
-console.log(g.next());
-console.log(g.next());
-console.log(g.next());
+
+
+async function getDataMagic(url){
+    const data = await fetch(url);
+    console.log(data);
+}
+
+getDataMagic(url).catch(console.error);
