@@ -53,7 +53,7 @@ const boxRef = document.querySelector('.box');
 //     .then(() => move('500px', 0))
 //     .then(() => move(0, 0));
 
-const url = 'https://api.nbp.pl/api/exchangerates/rates/a/usd/?format=json';
+// const url = 'https://api.nbp.pl/api/exchangerates/rates/a/usd/?format=json';
 
 // const request = fetch(url);
 //
@@ -62,31 +62,45 @@ const url = 'https://api.nbp.pl/api/exchangerates/rates/a/usd/?format=json';
 //     .then((data) => console.log(data.rates[0].mid))
 //     .catch(console.log);
 
-function myFetch(url) {
-    return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest()
+// function myFetch(url) {
+//     return new Promise((resolve, reject) => {
+//         const xhr = new XMLHttpRequest()
+//
+//         xhr.onload = function () {
+//             if (xhr.status >= 200 && xhr.status < 400) {
+//                 const response = JSON.parse(xhr.responseText)
+//                 resolve(response);
+//             } else {
+//                 reject(xhr.status);
+//             }
+//         }
+//
+//         xhr.onerror = function () {
+//             reject('Something is no yes!')
+//         }
+//
+//         xhr.open('GET', url, true);
+//         xhr.send()
+//     })
+// }
+//
+// const request = myFetch(url);
+//
+// request
+//     .then((data) => console.log(data))
+//     .catch((error) => console.log(error))
+//     .finally(() => {console.log('done!')})
 
-        xhr.onload = function () {
-            if (xhr.status >= 200 && xhr.status < 400) {
-                const response = JSON.parse(xhr.responseText)
-                resolve(response);
-            } else {
-                reject(xhr.status);
-            }
-        }
-
-        xhr.onerror = function () {
-            reject('Something is no yes!')
-        }
-
-        xhr.open('GET', url, true);
-        xhr.send()
-    })
+function* gen(){
+    console.log(1)
+    yield 1
+    console.log(2)
+    yield 2
+    console.log(3)
 }
 
-const request = myFetch(url);
+const g = gen();
 
-request
-    .then((data) => console.log(data))
-    .catch((error) => console.log(error))
-    .finally(() => {console.log('done!')})
+console.log(g.next());
+console.log(g.next());
+console.log(g.next());
